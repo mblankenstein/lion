@@ -334,10 +334,9 @@ describe('<lion-input-datepicker>', () => {
     });
 
     it('is accessible with a disabled date', async () => {
+      const no15th = d => d.getDate() !== 15;
       const el = await fixture(html`
-        <lion-input-datepicker
-          .errorValidators=${[isDateDisabledValidator(d => d.getDate() === 15)]}
-        >
+        <lion-input-datepicker .errorValidators=${[new IsDateDisabled(no15th)]}>
         </lion-input-datepicker>
       `);
       const elObj = new DatepickerInputObject(el);
